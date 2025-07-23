@@ -13,7 +13,7 @@ function RefeicaoCadastro() {
 
     useEffect(() => {
         async function carregarDados() {
-            setAlimentos(await buscarAlimentos());
+            setAlimentos(await listarAlimentos());
             setRefeicoes(await listarRefeicoes());
         }
         carregarDados();
@@ -28,7 +28,7 @@ function RefeicaoCadastro() {
             itens: [{ alimentoId, quantidade }]
         };
 
-        const sucesso = await cadastrarRefeicao(novaRefeicao);
+        const sucesso = await criarRefeicao(novaRefeicao);
         if (sucesso) {
             setMensagem('Refeição cadastrada com sucesso!');
             setNome('');

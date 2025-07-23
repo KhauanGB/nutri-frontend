@@ -6,7 +6,7 @@ const ListaAlimentos = () => {
     const [erro, setErro] = useState('');
 
     useEffect(() => {
-        const buscarAlimentos = async () => {
+        const listarAlimentos = async () => {
             try {
                 const resposta = await axios.get('http://localhost:8080/api/alimentos');
                 setAlimentos(resposta.data);
@@ -15,7 +15,7 @@ const ListaAlimentos = () => {
             }
         };
 
-        buscarAlimentos();
+        listarAlimentos();
     }, []);
 
     return (
