@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { cadastrarRefeicao, buscarAlimentos, buscarRefeicoes } from '../services/refeicaoService';
+import { criarRefeicao, listarRefeicoes } from '../services/refeicaoService';
+import { listarAlimentos } from '../services/alimentoService';
 
 function RefeicaoCadastro() {
     const [nome, setNome] = useState('');
@@ -13,7 +14,7 @@ function RefeicaoCadastro() {
     useEffect(() => {
         async function carregarDados() {
             setAlimentos(await buscarAlimentos());
-            setRefeicoes(await buscarRefeicoes());
+            setRefeicoes(await listarRefeicoes());
         }
         carregarDados();
     }, []);
@@ -34,7 +35,7 @@ function RefeicaoCadastro() {
             setData('');
             setAlimentoId('');
             setQuantidade('');
-            setRefeicoes(await buscarRefeicoes());
+            setRefeicoes(await listarRefeicoes());
         } else {
             setMensagem('Erro ao cadastrar refeição.');
         }

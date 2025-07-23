@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { cadastrarPlano, buscarPacientes, buscarRefeicoes } from '../services/planoService';
+import { criarPlano } from '../services/planoService';
+import { listarRefeicoes } from '../services/refeicaoService';
+import { listarUsuarios } from '../services/usuarioService';
 
 function PlanoCadastro() {
     const [nome, setNome] = useState('');
@@ -13,8 +15,8 @@ function PlanoCadastro() {
 
     useEffect(() => {
         async function carregarDados() {
-            const pacientesAPI = await buscarPacientes();
-            const refeicoesAPI = await buscarRefeicoes();
+            const pacientesAPI = await listarUsuarios();
+            const refeicoesAPI = await listarRefeicoes();
             setPacientes(pacientesAPI);
             setRefeicoes(refeicoesAPI);
         }
@@ -24,7 +26,7 @@ function PlanoCadastro() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const plano = { nome, dataInicio, dataFim, pacienteId, refeicoesIds };
-        const sucesso = await cadastrarPlano(plano);
+        const sucesso = await criarPlano(plano);
         if (sucesso) {
             setMensagem('Plano cadastrado com sucesso!');
             setNome('');
